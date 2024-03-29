@@ -1,16 +1,22 @@
 {
-  "name": "storage",
+  "name": "@imasalygin/storage",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "private": false,
   "scripts": {
-    "test": "vitest"
+    "test": "vitest --browser.name=chrome --browser.headless",
+    "tsc": "tsc",
+    "prepublishOnly": "rm -rf dist/ && yarn tsc && yarn test -- --run"
   },
   "keywords": [],
   "author": "Ilya Masalygin",
   "license": "ISC",
   "devDependencies": {
+    "@types/react": "^18.2.73",
+    "@vitest/browser": "^1.4.0",
     "typescript": "^5.4.3",
-    "vitest": "^1.4.0"
+    "vitest": "^1.4.0",
+    "webdriverio": "^8.35.1"
   }
 }
