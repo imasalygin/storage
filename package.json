@@ -1,0 +1,16 @@
+{
+  "name": "storage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "Ilya Masalygin",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.4.3",
+    "vitest": "^1.4.0"
+  }
+}
