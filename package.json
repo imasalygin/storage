@@ -9,8 +9,9 @@
     "tsc": "tsc",
     "prepublishOnly": "rm -rf dist/ && yarn tsc && yarn test -- --run"
   },
-  "keywords": [],
+  "keywords": ["localStorage", "sessionStorage", "typescript", "typed", "scope"],
   "author": "Ilya Masalygin",
+  "repository": "https://github.com/effector/effector",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^18.2.73",
