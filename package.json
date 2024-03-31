@@ -12,7 +12,7 @@
   "keywords": ["localStorage", "sessionStorage", "typescript", "typed", "scope"],
   "author": "Ilya Masalygin",
   "repository": "https://github.com/effector/effector",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/react": "^18.2.73",
     "@vitest/browser": "^1.4.0",
