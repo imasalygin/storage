@@ -11,7 +11,7 @@
   },
   "keywords": ["localStorage", "sessionStorage", "typescript", "typed", "scope"],
   "author": "Ilya Masalygin",
-  "repository": "https://github.com/effector/effector",
+  "repository": "https://github.com/imasalygin/storage",
   "license": "MIT",
   "devDependencies": {
     "@types/react": "^18.2.73",
