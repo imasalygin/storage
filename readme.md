@@ -1,6 +1,6 @@
 A tiny wrapper around localStorage/sessionStorage to make them typed
 
-##Usage
+## Usage
 
 ```ts
 import type { create, Nullable, StringKey } from '@imasalygin/storage';
@@ -13,14 +13,14 @@ const myStorage = create<{ firstKey: string; secondKey: number }>({
 myStorage('firstKey', 'value');
 ```
 
-##Options
+## Options
 
 - name - optional prefix for keys
 - storage - localStorage or sessionStorage or your implementation (default localStorage)
 - stringify - serialization function (default JSON.stringify)
 - parse - deserialization function (default JSON.parse)
 
-##React Hook
+## React Hook
 
 One way of implementation
 
