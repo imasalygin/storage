@@ -38,7 +38,7 @@ test('should get keys', () => {
 
 test('should get keys with prefix', () => {
   const storage = create<{'a': number}>({
-    name: 'asdf'
+    namespace: 'asdf'
   });
   storage.set('a', 1);
   expect(storage.keys()).toEqual(['a']);

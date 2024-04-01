@@ -10,12 +10,20 @@ const myStorage = create<{ firstKey: string; secondKey: number }>({
     storage: localStorage
 });
 
-myStorage('firstKey', 'value');
+myStorage.set('firstKey', 'value'); // correct
+myStorage.set('wrongKey', 'value'); // typescript error
+myStorage.set('firstKey', 1); // typescript error
+
+myStorage.get('firstKey'); // string | null
+
+myStorage.get(['firstKey', 'secondKey']); // { firstKey: string | null; secondKey: number | null }
+
+etc
 ```
 
 ## Options
 
-- name - optional prefix for keys
+- namespace - required prefix for keys
 - storage - localStorage or sessionStorage or your implementation (default localStorage)
 - stringify - serialization function (default JSON.stringify)
 - parse - deserialization function (default JSON.parse)
@@ -29,26 +37,26 @@ import type { create, Nullable, StringKey } from '@imasalygin/storage';
 import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
 
-export const useStorage = <Type extends Record<string, any>, Key extends StringKey<Type> = StringKey<Type>>(
+export const useStorage = <Type extends Record<string, unknown>, Key extends StringKey<Type> = StringKey<Type>>(
   { get, subscribe }: ReturnType<typeof create<Type, Key>>,
   ...keys: Key[]
 ): Nullable<Pick<Type, Key>> => {
   const [value, setValue] = useState(get(keys));
 
-  useEffect(() =>
-    subscribe(() => {
+  useEffect(() => {
+    return subscribe(() => {
       setValue((prev) => {
         const next = get(keys);
         return isEqual(prev, next) ? prev : next;
       });
     })
-  );
+  }, [subscribe, get, ...keys]);
 
   return value;
 };
 
 const MyComponent = () => {
-    const { firstKey } = useStorage(myStorage, 'firstKey');
+    const { firstKey, secondKey } = useStorage(myStorage, 'firstKey', 'secondKey');
     return <>{firstKey}</>;
 }
 ```

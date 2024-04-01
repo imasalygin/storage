@@ -7,7 +7,7 @@ export type Nullable<T> = {
 export type Subscription = () => void;
 
 export type Options = {
-  name?: string;
+  namespace: string;
   storage?: Storage;
   stringify?(value: any): string;
   parse?(value: string): any;
@@ -15,7 +15,7 @@ export type Options = {
 
 export function create<Type extends Record<string, any>, Key extends StringKey<Type> = StringKey<Type>>(options?: Options) {
   const {
-    name,
+    namespace,
     storage = localStorage,
     stringify = JSON.stringify,
     parse = JSON.parse,
@@ -34,7 +34,7 @@ export function create<Type extends Record<string, any>, Key extends StringKey<T
     subscriptions.forEach((fn) => fn());
   }
 
-  const prefix = name ? `${name}:` : '';
+  const prefix = `${namespace}:`;
 
   function id(key: Key) {
     return `${prefix}${key}`;
@@ -89,7 +89,7 @@ export function create<Type extends Record<string, any>, Key extends StringKey<T
 
   if (typeof window !== 'undefined' && [localStorage, sessionStorage].includes(storage)) {
     window.addEventListener('storage', (event) => {
-      if (keys().map(id).includes(event.key as Key)) {
+      if (event.key?.startsWith(prefix) && event.storageArea === storage) {
         notify();
       }
     });
