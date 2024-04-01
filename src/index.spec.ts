@@ -5,11 +5,13 @@ beforeEach(() => {
   localStorage.clear();
 })
 
-const storage = create<{a: number, b: string, c: boolean}>();
+const storage = create<{a: number, b: string, c: boolean}>({
+  namespace: 'test'
+});
 
 test('should set value', () => {
   storage.set('a', 1);
-  expect(localStorage.getItem('a')).toBe('1');
+  expect(localStorage.getItem('test:a')).toBe('1');
 });
 
 test('should get value', () => {
