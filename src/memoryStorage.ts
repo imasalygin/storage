@@ -25,6 +25,10 @@ class MemoryStorage implements Storage {
         this.#map.set(key, value);
     }
 
+    emit() {
+        // TODO: !
+    }
+
 }
 
 export const memoryStorage = new MemoryStorage();

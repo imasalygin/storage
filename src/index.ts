@@ -1,3 +1,5 @@
+import { memoryStorage } from './memoryStorage';
+
 interface CreateStorageOptions<T> {
   key: string;
   storage?: Storage;
@@ -14,7 +16,7 @@ type Subscription = () => void;
 export function create<T>(options: CreateStorageOptions<T>){
   const {
     key,
-    storage = localStorage,
+    storage = 'localStorage' in globalThis ? localStorage : memoryStorage,
     parse = JSON.parse,
     stringify = JSON.stringify,
     defaults = null
@@ -43,7 +45,7 @@ export function create<T>(options: CreateStorageOptions<T>){
     publish();
   }
 
-  globalThis.addEventListener('storage', (event) => {
+  addEventListener('storage', (event) => {
     if (event.key === key && event.storageArea === storage) {
       publish();
     }
