@@ -1,23 +1,44 @@
 {
   "name": "@imasalygin/storage",
-  "version": "1.0.2",
-  "description": "",
+  "version": "2.0.0",
+  "description": "A type-safe localStorage wrapper",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "private": false,
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "vitest --browser.name=chrome --browser.headless",
-    "tsc": "tsc",
-    "prepublishOnly": "rm -rf dist/ && yarn tsc && yarn test -- --run"
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts,.tsx",
+    "prepublishOnly": "rm -rf dist/ && npm run build && npm test"
   },
-  "keywords": ["localStorage", "sessionStorage", "typescript", "typed", "scope"],
+  "keywords": [
+    "localStorage",
+    "sessionStorage",
+    "react",
+    "effector",
+    "typescript",
+    "storage"
+  ],
   "author": "Ilya Masalygin",
   "repository": "https://github.com/imasalygin/storage",
   "license": "MIT",
   "devDependencies": {
-    "@types/react": "^18.2.73",
-    "@vitest/browser": "^1.4.0",
-    "typescript": "^5.4.3",
-    "vitest": "^1.4.0",
-    "webdriverio": "^8.35.1"
+    "@testing-library/react": "^14.2.1",
+    "@types/react": "^18.2.67",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vitest/coverage-v8": "^3.2.3",
+    "effector": "^23.2.0",
+    "eslint": "^8.57.0",
+    "fast-equals": "^5.2.2",
+    "jsdom": "^24.0.0",
+    "react": "^18.2.0",
+    "typescript": "^5.4.2",
+    "vitest": "^3.2.3"
   }
 }
