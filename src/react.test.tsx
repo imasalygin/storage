@@ -20,7 +20,7 @@ describe('Storage with React', () => {
 
   test('should sync with localStorage', () => {
     const storage = createThemeStorage();
-    const { result } = renderHook(() => 
+    const { result } = renderHook(() =>
       useSyncExternalStore(storage.subscribe, storage.get)
     );
 
@@ -41,10 +41,10 @@ describe('Storage with React', () => {
 
   test('should sync across multiple hooks', () => {
     const storage = createThemeStorage();
-    const hook1 = renderHook(() => 
+    const hook1 = renderHook(() =>
       useSyncExternalStore(storage.subscribe, storage.get)
     );
-    const hook2 = renderHook(() => 
+    const hook2 = renderHook(() =>
       useSyncExternalStore(storage.subscribe, storage.get)
     );
 
@@ -64,15 +64,16 @@ describe('Storage with React', () => {
 
   test('should handle storage events', () => {
     const storage = createThemeStorage();
-    const { result } = renderHook(() => 
+    const { result } = renderHook(() =>
       useSyncExternalStore(storage.subscribe, storage.get)
     );
 
     act(() => {
       localStorage.setItem('theme', JSON.stringify({ mode: 'dark', primaryColor: '#0A84FF' }));
-      
+
       const event = new StorageEvent('storage', {
-        key: 'theme'
+        key: 'theme',
+        storageArea: localStorage
       });
       window.dispatchEvent(event);
     });
@@ -88,11 +89,11 @@ describe('Storage with React', () => {
     const unsubscribe = vi.fn();
     vi.spyOn(storage, 'subscribe').mockReturnValue(unsubscribe);
 
-    const { unmount } = renderHook(() => 
+    const { unmount } = renderHook(() =>
       useSyncExternalStore(storage.subscribe, storage.get)
     );
 
     unmount();
     expect(unsubscribe).toHaveBeenCalled();
   });
-}); 
+});

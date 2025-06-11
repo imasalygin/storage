@@ -30,7 +30,7 @@ export class StorageItem<T> {
         }
 
         addEventListener('storage', (event: StorageEvent) => {
-            if (event.key === this.key) {
+            if (event.key === this.key && event.storageArea === this.storage) {
                 this.refresh();
                 this.notify();
             }
