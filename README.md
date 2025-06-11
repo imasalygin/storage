@@ -42,7 +42,7 @@ themeStorage.remove();
 
 ### React Integration
 
-```typescript
+```tsx
 import { useSyncExternalStore } from 'react';
 import { StorageItem } from '@imasalygin/storage';
 
@@ -73,9 +73,9 @@ The StorageItem class implements the Observable interface, making it compatible 
 
 ```typescript
 // Tab 1
-const storage = new StorageItem<Theme>({ key: 'theme', value: null });
+const storage = new StorageItem<Theme>({ key: 'theme' });
 
-const $theme = createStore<Theme>(storage.get());
+const $theme = createStore<Theme | null>(storage.get());
 const event = fromObservable<Theme>(storage);
 $theme.on(event, (_, value) => value);
 
